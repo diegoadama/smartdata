@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Install jq & curl
       run: sudo apt-get update && sudo apt-get install -y jq curl
@@ -21,7 +21,7 @@ jobs:
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
         ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
         NOTEBOOK_BASE="/Workspace/Users/ddamav@innovacioncloud.onmicrosoft.com/smartdata/proceso"
-        NOTEBOOKS=("1.Preparacion_Ambiente" "2.Ingest circuits data" "2.Ingest Constructors" "2.Ingest racing data" "3.Transform" "4.Load")  # Agrega más según necesitesas
+        NOTEBOOKS=("1.Preparacion_Ambiente" "2.Ingest_circuits_data" "2.Ingest_Constructors" "2.Ingest_racing_data" "3.Transform" "4.Load")  # Agrega más según necesitesas
 
         mkdir -p notebooks_to_deploy
 
