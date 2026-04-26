@@ -1,0 +1,1205 @@
+{
+  "datasets": [
+    {
+      "name": "dataset1",
+      "displayName": "silver_clientes_polizas",
+      "queryLines": [
+        "SELECT * FROM catalog_au.silver.clientes_polizas_transformed"
+      ]
+    },
+    {
+      "name": "5989fab7",
+      "displayName": "golden_polizas_kpis",
+      "queryLines": [
+        "select * from catalog_au.golden.golden_kpis"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "page1",
+      "displayName": "KPIs Ejecutivos",
+      "layout": [
+        {
+          "widget": {
+            "name": "text_box1",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 📊 KPIs Ejecutivos - Capa Golden\n",
+                "Visión consolidada de pólizas, siniestros y rentabilidad por ciudad y tipo de seguro."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "counter_polizas",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "sum(polizas)",
+                      "expression": "SUM(`polizas`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Pólizas",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(polizas)",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    },
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Total Pólizas"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "counter_siniestros",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "sum(siniestros)",
+                      "expression": "SUM(`siniestros`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Siniestros",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(siniestros)",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    },
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Total Siniestros"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "counter_prima",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "sum(prima_anual_total)",
+                      "expression": "SUM(`prima_anual_total`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Prima Anual Total",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(prima_anual_total)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "PEN",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    },
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Prima Anual Total"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "counter_reclamado",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "sum(monto_reclamado_total)",
+                      "expression": "SUM(`monto_reclamado_total`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Monto Reclamado Total",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(monto_reclamado_total)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "PEN",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    },
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Monto Reclamado Total"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "line_evolucion",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "mes",
+                      "expression": "`mes`"
+                    },
+                    {
+                      "name": "sum(polizas)",
+                      "expression": "SUM(`polizas`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Evolución Mensual de Pólizas y Siniestros",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "mes",
+                  "displayName": "Mes",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(polizas)",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    },
+                    "abbreviation": "none"
+                  },
+                  "displayName": "Pólizas",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "bar_prima_ciudad",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "ciudad",
+                      "expression": "`ciudad`"
+                    },
+                    {
+                      "name": "sum(prima_anual_total)",
+                      "expression": "SUM(`prima_anual_total`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Prima Anual por Ciudad",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "ciudad",
+                  "displayName": "Ciudad",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(prima_anual_total)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "PEN",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    },
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Prima Total",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 4,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "pie_tipo_seguro",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "sum(polizas)",
+                      "expression": "SUM(`polizas`)"
+                    },
+                    {
+                      "name": "tipo_seguro",
+                      "expression": "`tipo_seguro`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Distribución de Pólizas por Tipo de Seguro",
+                "showTitle": true
+              },
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "sum(polizas)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Total Pólizas"
+                },
+                "color": {
+                  "fieldName": "tipo_seguro",
+                  "legend": {
+                    "position": "right"
+                  },
+                  "displayName": "Tipo de Seguro",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 10,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "bar_ratio_tipo",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "tipo_seguro",
+                      "expression": "`tipo_seguro`"
+                    },
+                    {
+                      "name": "avg(ratio)",
+                      "expression": "AVG(`ratio`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Ratio Siniestralidad por Tipo de Seguro",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "tipo_seguro",
+                  "displayName": "Tipo de Seguro",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(ratio)",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 2
+                    },
+                    "abbreviation": "none"
+                  },
+                  "displayName": "Ratio Promedio",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 10,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "clientes",
+      "displayName": "Análisis de Clientes y Pólizas",
+      "layout": [
+        {
+          "widget": {
+            "name": "titulo_silver",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 👥 Análisis de Clientes y Pólizas - Capa Silver\n",
+                "Desglose detallado del portafolio de clientes, estados de póliza y perfil demográfico."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "counter_total_polizas",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "count(id_poliza)",
+                      "expression": "COUNT(`id_poliza`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Pólizas",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "count(id_poliza)",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    },
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Total Pólizas"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 4,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "counter_clientes",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "countdistinct(id_cliente)",
+                      "expression": "COUNT(DISTINCT `id_cliente`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Clientes Únicos",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "countdistinct(id_cliente)",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    },
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Clientes Únicos"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 2,
+            "width": 4,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "counter_prima_avg",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "avg(prima_anual)",
+                      "expression": "AVG(`prima_anual`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Prima Anual Promedio",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(prima_anual)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "PEN",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    },
+                    "abbreviation": "none"
+                  },
+                  "displayName": "Prima Promedio"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 4,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "bar_ciudad",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "ciudad",
+                      "expression": "`ciudad`"
+                    },
+                    {
+                      "name": "count(id_poliza)",
+                      "expression": "COUNT(`id_poliza`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Pólizas por Ciudad",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "ciudad",
+                  "displayName": "Ciudad",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "count(id_poliza)",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    },
+                    "abbreviation": "none"
+                  },
+                  "displayName": "Total Pólizas",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "pie_estado",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "count(id_poliza)",
+                      "expression": "COUNT(`id_poliza`)"
+                    },
+                    {
+                      "name": "estado_poliza",
+                      "expression": "`estado_poliza`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Distribución por Estado de Póliza",
+                "showTitle": true
+              },
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "count(id_poliza)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Cantidad"
+                },
+                "color": {
+                  "fieldName": "estado_poliza",
+                  "legend": {
+                    "position": "right"
+                  },
+                  "displayName": "Estado Póliza",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 4,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "hist_edad",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "edad_cliente",
+                      "expression": "`edad_cliente`"
+                    },
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Distribución de Edad de Clientes",
+                "showTitle": true
+              },
+              "widgetType": "histogram",
+              "encodings": {
+                "x": {
+                  "fieldName": "edad_cliente",
+                  "displayName": "Edad",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(*)",
+                  "displayName": "Frecuencia",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 10,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "bar_tipo_seguro",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "estado_poliza",
+                      "expression": "`estado_poliza`"
+                    },
+                    {
+                      "name": "tipo_seguro",
+                      "expression": "`tipo_seguro`"
+                    },
+                    {
+                      "name": "sum(prima_anual)",
+                      "expression": "SUM(`prima_anual`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Prima Anual por Tipo de Seguro",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "stack"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "tipo_seguro",
+                  "displayName": "Tipo de Seguro",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(prima_anual)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "PEN",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 1
+                    },
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Prima Total",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "estado_poliza",
+                  "legend": {
+                    "position": "bottom"
+                  },
+                  "displayName": "Estado Póliza",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 10,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "global_filters",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "filter_ciudad",
+            "queries": [
+              {
+                "name": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14192ffc11fd5803dcdff6f8cd8b8_ciudad",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "ciudad",
+                      "expression": "`ciudad`"
+                    },
+                    {
+                      "name": "ciudad_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14182da4d1e329b71d56d9252ad0c_ciudad",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "ciudad",
+                      "expression": "`ciudad`"
+                    },
+                    {
+                      "name": "ciudad_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Ciudad",
+                "showTitle": true
+              },
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "ciudad",
+                    "queryName": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14192ffc11fd5803dcdff6f8cd8b8_ciudad"
+                  },
+                  {
+                    "fieldName": "ciudad",
+                    "queryName": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14182da4d1e329b71d56d9252ad0c_ciudad"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "filter_tipo_seguro",
+            "queries": [
+              {
+                "name": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14192ffc11fd5803dcdff6f8cd8b8_tipo_seguro",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "tipo_seguro",
+                      "expression": "`tipo_seguro`"
+                    },
+                    {
+                      "name": "tipo_seguro_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14182da4d1e329b71d56d9252ad0c_tipo_seguro",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "tipo_seguro",
+                      "expression": "`tipo_seguro`"
+                    },
+                    {
+                      "name": "tipo_seguro_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Tipo de Seguro",
+                "showTitle": true
+              },
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "tipo_seguro",
+                    "queryName": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14192ffc11fd5803dcdff6f8cd8b8_tipo_seguro"
+                  },
+                  {
+                    "fieldName": "tipo_seguro",
+                    "queryName": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14182da4d1e329b71d56d9252ad0c_tipo_seguro"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "filter_estado_poliza",
+            "queries": [
+              {
+                "name": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14182da4d1e329b71d56d9252ad0c_estado_poliza",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "estado_poliza",
+                      "expression": "`estado_poliza`"
+                    },
+                    {
+                      "name": "estado_poliza_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Estado de Póliza",
+                "showTitle": true
+              },
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "estado_poliza",
+                    "queryName": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14182da4d1e329b71d56d9252ad0c_estado_poliza"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "filter_fecha_rango",
+            "queries": [
+              {
+                "name": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14192ffc11fd5803dcdff6f8cd8b8_mes",
+                "query": {
+                  "datasetName": "5989fab7",
+                  "fields": [
+                    {
+                      "name": "mes",
+                      "expression": "`mes`"
+                    },
+                    {
+                      "name": "mes_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14182da4d1e329b71d56d9252ad0c_fecha_inicio",
+                "query": {
+                  "datasetName": "dataset1",
+                  "fields": [
+                    {
+                      "name": "fecha_inicio",
+                      "expression": "`fecha_inicio`"
+                    },
+                    {
+                      "name": "fecha_inicio_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Rango de Fechas",
+                "showTitle": true
+              },
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "mes",
+                    "queryName": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14192ffc11fd5803dcdff6f8cd8b8_mes"
+                  },
+                  {
+                    "fieldName": "fecha_inicio",
+                    "queryName": "dashboards/01f14182da4d1d4cbd970815bdebc2a0/datasets/01f14182da4d1e329b71d56d9252ad0c_fecha_inicio"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 1,
+            "width": 6,
+            "height": 1
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "visualizationColors": [
+        "#1B6B93",
+        "#F4A261",
+        "#2A9D8F",
+        "#E76F51",
+        "#264653",
+        "#E9C46A",
+        "#457B9D",
+        "#F4845F"
+      ],
+      "widgetHeaderAlignment": "LEFT",
+      "fontFamily": "Trebuchet MS"
+    },
+    "applyModeEnabled": false
+  }
+}
